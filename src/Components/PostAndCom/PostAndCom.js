@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import { CardContent, Button } from '@material-ui/core';
+import style from './PostAndCom.module.css'
 
 
-const PostAndCom = ( ) => {
+
+const PostAndCom = () => {
 
     let { id } = useParams();
-    let { postId } = useParams();
 
     const [fetchDetail, setFetchDetail] = useState([]);
 
     const [comments, setComments] = useState([]);
 
+    const [loading, setLoading] = useState(true);
+
 
     const { title, body } = fetchDetail;
 
-    const { email, name } = comments;
 
     useEffect(() => {
         const comFatchData = async () => {
@@ -23,14 +28,20 @@ const PostAndCom = ( ) => {
                 const comRes = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`); //postId
                 const comData = comRes.data;
                 setComments(comData);
-                console.log(comData);
-            
-        } catch (error) {
-            console.log(error)
-        }
+                setLoading(false)
+
+            } catch (error) {
+                console.log(error)
+            }
         }
         comFatchData();
     }, [setComments])
+
+    const history = useHistory();
+
+    const handleBack = () => {
+        history.push('/')
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,9 +49,8 @@ const PostAndCom = ( ) => {
                 const post = `posts/${id}/`
                 const idRes = await axios.get(`https://jsonplaceholder.typicode.com/${post}`);
                 const idData = idRes.data;
-                console.log(idData)
                 setFetchDetail(idData);
-
+                setLoading(false)
             } catch (error) {
                 console.log(error)
             }
@@ -51,13 +61,25 @@ const PostAndCom = ( ) => {
 
 
     return (
-        <div>
-            <h1>  {title} </h1>
-            <h1>  {body} </h1>
+      !loading ? (   
+        <Card>
+            <Typography className={style.center} variant='h4'>  {title} </Typography>
+            <Typography className={style.center_body} variant='h5'>  {body} </Typography>
+            <hr className={style.hr} />
+            <Typography className={style.center_body} variant='h3'>  Comments </Typography>
+
             {
-                comments.map((comment) => <h1 key={comment.id}> {comment.email} </h1>).slice(0,4)
+                comments.map((comment) => (
+                    <CardContent key={comment.id}>
+                        <Typography variant='h4'> {comment.email} </Typography>
+                        <Typography variant='h6' > {comment.title} </Typography>
+                        <Typography variant='h6' > {comment.body} </Typography>
+                        {/* This post.id use for map */}
+                    </CardContent>
+                )).slice(0, 4)
             }
-        </div>
+            <Button className= {style.btn} color="secondary" onClick={() => handleBack()}>Go Back</Button>
+        </Card> ) : <h1>Loading...</h1>
     );
 }
 

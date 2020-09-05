@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import style from './Navbar.module.css';
+import { useHistory } from 'react-router-dom';
 
 const Navbar = () => {
 
@@ -29,8 +30,8 @@ const Navbar = () => {
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Blog
+          <Typography variant="h6" className={classes.title} >
+            Blog 
           </Typography>
           <Button color="inherit">Blog Details</Button>
         </Toolbar>
