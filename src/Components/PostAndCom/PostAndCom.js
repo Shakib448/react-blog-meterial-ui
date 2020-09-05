@@ -109,7 +109,7 @@ const PostAndCom = () => {
 
     return (
 
-        !loading ? (<div className={classes.root}>
+        !loading ? (<Box className={classes.root}>
             <Typography className={style.center} variant='h4'>  {title} </Typography>
             <Typography className={style.center_body} variant='h5'>  {body} </Typography>
             <hr className={style.hr} />
@@ -148,10 +148,10 @@ const PostAndCom = () => {
             }
             <Box className={style.btn}>
                 <Button color="secondary" onClick={() => handleBack()}>Go Back</Button>
-
             </Box>
 
-        </div>) : <h1>Loading...</h1>
+        </Box>) :  <Typography className={style.center} variant='h1'>  Loading..... </Typography>
+
     );
 }
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import { Box } from '@material-ui/core';
+import style from './Pagination.module.css'
 
 
 
@@ -14,7 +16,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
 
     return (
-        <>
+        <Box className={style.center}>
 
             {pageNumbers.map(pageNumber => (
                     <Button color='secondary' key={pageNumber} onClick={() => paginate(pageNumber)} >
@@ -22,7 +24,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
                     </Button>
             ))}
 
-        </>
+        </Box>
     );
 }
 

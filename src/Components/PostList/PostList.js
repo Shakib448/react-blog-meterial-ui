@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
+import { Box } from '@material-ui/core';
 
 
 const PostList = ({ posts, loading }) => {
@@ -14,7 +15,8 @@ const PostList = ({ posts, loading }) => {
     }
 
     if (loading) {
-        return <h2>Loading.......</h2>
+        return   <Typography style={{textAlign: 'center'}} variant='h1'>  Loading... </Typography>
+
     }
 
 
@@ -26,13 +28,13 @@ const PostList = ({ posts, loading }) => {
         <>
             {
                 posts.map((post) => (
-                    <div key={post.id}>
+                    <Box key={post.id}>
                         <Typography variant='h4'> {truncate(post.title, 50)} </Typography>
                         <Typography variant='h6' > {truncate(post.body, 130)} </Typography>
                         {/* This post.id use for map */}
                         <Button color="secondary" onClick={() => hadlePostDetail(post.id)}>See More</Button>
                         <hr />
-                    </div>
+                    </Box>
                 ))
             }
 
