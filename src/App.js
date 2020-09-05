@@ -13,7 +13,7 @@ function App() {
         <Router>
           <Switch>
             <Route exact path='/' component={Posts}/>
-            <Route exact path='/blog/details/:id' componet={PostAndCom}/> 
+            <Route exact path='/blog/details/:id' component={PostAndCom}/> 
             <Route exact path='*' component={Notfound}/>
           </Switch>
         </Router>

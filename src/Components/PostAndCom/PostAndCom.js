@@ -3,27 +3,44 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 
-const PostAndCom = () => {
+const PostAndCom = ( ) => {
 
-    let {id} = useParams();
+    let { id } = useParams();
+    let { postId } = useParams();
 
     const [fetchDetail, setFetchDetail] = useState([]);
 
-    console.log(fetchDetail)
+    const [comments, setComments] = useState([]);
 
-    const {title, body} = fetchDetail;
+
+    const { title, body } = fetchDetail;
+
+    const { email, name } = comments;
 
     useEffect(() => {
+        const comFatchData = async () => {
+            try {
+                const comRes = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`); //postId
+                const comData = comRes.data;
+                setComments(comData);
+                console.log(comData);
+            
+        } catch (error) {
+            console.log(error)
+        }
+        }
+        comFatchData();
+    }, [setComments])
 
+    useEffect(() => {
         const fetchData = async () => {
             try {
-            const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
-            console.log(res);
-            const data = res.data;
-            console.log(data);
-            setFetchDetail(data);
-            
-                
+                const post = `posts/${id}/`
+                const idRes = await axios.get(`https://jsonplaceholder.typicode.com/${post}`);
+                const idData = idRes.data;
+                console.log(idData)
+                setFetchDetail(idData);
+
             } catch (error) {
                 console.log(error)
             }
@@ -32,12 +49,14 @@ const PostAndCom = () => {
 
     }, [])
 
-    console.log(fetchDetail[0])
 
     return (
         <div>
-            <h1> Here is the {title} </h1>
-            <h1> Here is the {body} </h1>
+            <h1>  {title} </h1>
+            <h1>  {body} </h1>
+            {
+                comments.map((comment) => <h1 key={comment.id}> {comment.email} </h1>).slice(0,4)
+            }
         </div>
     );
 }

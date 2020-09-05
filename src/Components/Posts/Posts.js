@@ -9,7 +9,6 @@ import Pagination from '../Pagination/Pagination';
 
 const Posts = () => {
 
-
     const [posts , setPosts] = useState([]);
 
     const [loading , setLoading] = useState(true);
@@ -18,15 +17,6 @@ const Posts = () => {
   
     const [postsPerPage] = useState(10); // Here is the 10 data executed
 
-    // const [postDetail, setPostDetail] = useState([]);
-
-    // // console.log(postDetail);
-
-    // const handlePost = (newPost) => {
-    //     const detailPost = [...posts, newPost];
-    //     console.log(detailPost)
-    //     setPostDetail(detailPost);
-    // }
 
     
     useEffect(() => {
@@ -35,7 +25,7 @@ const Posts = () => {
             try {
                 const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
                 const data = res.data;
-                console.log(data)
+                // console.log(data)
                 setPosts(data);
                 setLoading(false);
             } catch (error) {
@@ -46,30 +36,27 @@ const Posts = () => {
 
     }, [])
 
+
       // Get current posts
 
     const indexOfLastPost = currentPage * postsPerPage;
 
-    // console.log(indexOfLastPost);
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
-    // console.log(indexOfFirstPost);
 
     const currentPost = posts.slice(indexOfFirstPost, indexOfLastPost);
-    // console.log(currentPost);
 
-    //Change page
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     return (
      <Card >
-            <Typography className={Style.center} variant='h3' gutterBottom>Welcome to my Blog Page {posts.length} </Typography>
+            <Typography className={Style.center} variant='h3' gutterBottom>Welcome to my Blog Page   
+            </Typography>
             <hr className={Style.hr}/>
             <CardContent>
 
             <PostList posts={currentPost} loading={loading}/>
-            {/* <PostList posts={posts} loading={loading} /> */}
 
              <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
 
