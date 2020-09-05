@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 
-const PostList = ({ posts, loading  }) => {
+const PostList = ({ posts, loading, handlePost  }) => {
 
     if(loading){
         return <h2>Loading.......</h2>
@@ -17,14 +17,14 @@ const PostList = ({ posts, loading  }) => {
     return (
         <>
                 {
-                    posts.map(post =>(
-                        <Typography variant='span'>   
-                        <Typography  key={post.id} variant='h4'> {truncate(post.title, 50)} </Typography>
-                        <Typography variant='h6'> {truncate(post.body, 130)} </Typography>
-                        <Button color="secondary" href="#contained-buttons">See More</Button>
-                        <hr/> 
-                        </Typography>
-                    ))
+                    posts.map((post) => 
+                    // this div used for key issue solved
+                        <div key={post.id}> 
+                        <Typography variant='h4'> {truncate(post.title, 50)} </Typography>
+                        <Typography variant='h6' > {truncate(post.body, 130)} </Typography>
+                        <Button color="secondary" onClick={() => handlePost(posts)}>See More</Button>
+                        </div>
+                    )
                 }
         </>
     );

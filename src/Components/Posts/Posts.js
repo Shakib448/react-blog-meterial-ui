@@ -18,6 +18,14 @@ const Posts = () => {
   
     const [postsPerPage] = useState(10); // Here is the 10 data executed
 
+    const [postDetail, setPostDetail] = useState([]);
+
+    const handlePost = (postDetail) => {
+        const detailPost = [...posts, postDetail];
+        console.log(detailPost);
+        setPostDetail(detailPost);
+    }
+
     
     useEffect(() => {
 
@@ -57,7 +65,7 @@ const Posts = () => {
             <hr className={Style.hr}/>
             <CardContent>
 
-            <PostList posts={currentPost} loading={loading}/>
+            <PostList posts={currentPost} loading={loading} handlePost={handlePost}/>
 
              <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
 
