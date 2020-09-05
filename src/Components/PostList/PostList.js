@@ -22,7 +22,7 @@ const PostList = ({ posts, loading, handlePost  }) => {
                         <div key={post.id}> 
                         <Typography variant='h4'> {truncate(post.title, 50)} </Typography>
                         <Typography variant='h6' > {truncate(post.body, 130)} </Typography>
-                        <Button color="secondary" onClick={() => handlePost(posts)}>See More</Button>
+                        <Button color="secondary" onClick={() => handlePost(post)}>See More</Button>
                         </div>
                     )
                 }

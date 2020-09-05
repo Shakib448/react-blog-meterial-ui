@@ -20,9 +20,10 @@ const Posts = () => {
 
     const [postDetail, setPostDetail] = useState([]);
 
-    const handlePost = (postDetail) => {
-        const detailPost = [...posts, postDetail];
-        console.log(detailPost);
+    // console.log(postDetail);
+
+    const handlePost = (newPost) => {
+        const detailPost = [...posts, newPost];
         setPostDetail(detailPost);
     }
 
