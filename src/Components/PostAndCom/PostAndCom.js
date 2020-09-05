@@ -3,8 +3,12 @@ import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import { CardContent, Button } from '@material-ui/core';
-import style from './PostAndCom.module.css'
+import { CardContent, Button, Box } from '@material-ui/core';
+import style from './PostAndCom.module.css';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 
 
@@ -80,28 +84,75 @@ const PostAndCom = () => {
     }, [])
 
 
-    return (
-        !loading ? (
-            <Card>
-                <Typography className={style.center} variant='h4'>  {title} </Typography>
-                <Typography className={style.center_body} variant='h5'>  {body} </Typography>
-                <hr className={style.hr} />
-                <Typography className={style.center_body} variant='h3'>  Comments </Typography>
+    const useStyles = makeStyles((theme) => ({
+        root: {
+            flexGrow: 1,
+        },
+        paper: {
+            padding: theme.spacing(2),
+            margin: 'auto',
+            maxWidth: 800,
+        },
+        image: {
+            width: 128,
+            height: 128,
+            borderRadius: '50px'
+        },
+        img: {
+            margin: 'auto',
+            display: 'block',
+            maxWidth: '100%',
+            maxHeight: '100%',
+        },
+    }));
 
-                {
-                    comments.map((comment) => (
-                        <CardContent key={comment.id}>
-                            <Typography variant='h4'> {comment.email} </Typography>
-                            <Typography variant='h6' > {comment.title} </Typography>
-                            <Typography variant='h6' > {comment.body} </Typography>
-                            {
-                                photos.map((photo) => <img key={photo.id} src={photo.thumbnailUrl} />).slice(0, 1)
-                            }
-                        </CardContent>
-                    )).slice(0, 4)
-                }
-                <Button className={style.btn} color="secondary" onClick={() => handleBack()}>Go Back</Button>
-            </Card>) : <h1>Loading...</h1>
+    const classes = useStyles();
+
+    return (
+
+        !loading ? (<div className={classes.root}>
+            <Typography className={style.center} variant='h4'>  {title} </Typography>
+            <Typography className={style.center_body} variant='h5'>  {body} </Typography>
+            <hr className={style.hr} />
+            <Typography className={style.center_body} variant='h3'>  Comments </Typography>
+
+            {
+                comments.map((comment) => (
+                    <Paper className={classes.paper}>
+                        <Grid container spacing={2}>
+                            <Grid item>
+                                <ButtonBase className={classes.image}>
+                                    {
+                                        photos.map((photo) => <img className={classes.img} alt="complex" src={photo.thumbnailUrl} />).slice(0, 1)
+                                    }
+                                </ButtonBase>
+                            </Grid>
+                            <Grid item xs={12} sm container>
+                                <Grid item xs container direction="column" spacing={2}>
+                                    <Grid item xs>
+                                        <Typography gutterBottom variant="subtitle1">
+                                            {comment.title}
+                                        </Typography>
+                                        <Typography gutterBottom variant="subtitle1">
+                                            {comment.email}
+                                        </Typography>
+                                        <Typography variant="body2" color="textSecondary">
+                                            {comment.body}
+                                        </Typography>
+                                    </Grid>
+
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Paper>
+                )).slice(0, 4)
+            }
+            <Box className={style.btn}>
+                <Button color="secondary" onClick={() => handleBack()}>Go Back</Button>
+
+            </Box>
+
+        </div>) : <h1>Loading...</h1>
     );
 }
 
