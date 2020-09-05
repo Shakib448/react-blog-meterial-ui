@@ -18,15 +18,15 @@ const Posts = () => {
   
     const [postsPerPage] = useState(10); // Here is the 10 data executed
 
-    const [postDetail, setPostDetail] = useState([]);
+    // const [postDetail, setPostDetail] = useState([]);
 
-    // console.log(postDetail);
+    // // console.log(postDetail);
 
-    const handlePost = (newPost) => {
-        const detailPost = [...posts, newPost];
-        console.log(detailPost)
-        setPostDetail(detailPost);
-    }
+    // const handlePost = (newPost) => {
+    //     const detailPost = [...posts, newPost];
+    //     console.log(detailPost)
+    //     setPostDetail(detailPost);
+    // }
 
     
     useEffect(() => {
@@ -35,7 +35,7 @@ const Posts = () => {
             try {
                 const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
                 const data = res.data;
-                console.log(data[0])
+                console.log(data)
                 setPosts(data);
                 setLoading(false);
             } catch (error) {
@@ -68,8 +68,8 @@ const Posts = () => {
             <hr className={Style.hr}/>
             <CardContent>
 
-            <PostList posts={currentPost} loading={loading} handlePost={handlePost}/>
-            {/* <PostList posts={posts} loading={loading} handlePost={handlePost}/> */}
+            <PostList posts={currentPost} loading={loading}/>
+            {/* <PostList posts={posts} loading={loading} /> */}
 
              <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
 
