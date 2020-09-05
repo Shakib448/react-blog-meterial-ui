@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import { CardContent, Button, Box } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
 import style from './PostAndCom.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -33,7 +32,6 @@ const PostAndCom = () => {
             try {
                 const photoRes = await axios.get(`https://jsonplaceholder.typicode.com/albums/${id}/photos`);
                 const photoData = photoRes.data;
-                console.log(photoData)
                 setPhotos(photoData);
                 setLoading(false)
 
@@ -96,13 +94,14 @@ const PostAndCom = () => {
         image: {
             width: 128,
             height: 128,
-            borderRadius: '50px'
+
         },
         img: {
             margin: 'auto',
             display: 'block',
             maxWidth: '100%',
             maxHeight: '100%',
+            borderRadius: '100px'
         },
     }));
 
@@ -118,12 +117,12 @@ const PostAndCom = () => {
 
             {
                 comments.map((comment) => (
-                    <Paper className={classes.paper}>
+                    <Paper key={comment.id} className={classes.paper}>
                         <Grid container spacing={2}>
                             <Grid item>
                                 <ButtonBase className={classes.image}>
                                     {
-                                        photos.map((photo) => <img className={classes.img} alt="complex" src={photo.thumbnailUrl} />).slice(0, 1)
+                                        photos.map((photo) => <img key={photo.id} className={classes.img} alt="complex" src={photo.thumbnailUrl} />).slice(0, 1)
                                     }
                                 </ButtonBase>
                             </Grid>
