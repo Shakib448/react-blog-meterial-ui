@@ -52,7 +52,7 @@ const Posts = () => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     return (
-         <Card >
+     <Card >
             <Typography className={Style.center} variant='h3' gutterBottom>Welcome to my Blog Page</Typography>
             <hr className={Style.hr}/>
             <CardContent>
@@ -62,7 +62,7 @@ const Posts = () => {
              <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
 
              </CardContent>
-        </Card>           
+        </Card>         
     );
 }
 

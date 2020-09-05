@@ -3,10 +3,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 
-const PostList = ({ posts , loading }) => {
+const PostList = ({ posts, loading  }) => {
 
-    if(loading) {
-        return <h2>Loading......</h2>
+    if(loading){
+        return <h2>Loading.......</h2>
     }
 
     function truncate(str, n){
@@ -19,7 +19,7 @@ const PostList = ({ posts , loading }) => {
                 {
                     posts.map(post =>(
                         <Typography variant='span'>   
-                        <Typography  key={post.id} variant='h4'> {post.title} </Typography>
+                        <Typography  key={post.id} variant='h4'> {truncate(post.title, 50)} </Typography>
                         <Typography variant='h6'> {truncate(post.body, 130)} </Typography>
                         <Button color="secondary" href="#contained-buttons">See More</Button>
                         <hr/> 
