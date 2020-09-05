@@ -24,6 +24,7 @@ const Posts = () => {
 
     const handlePost = (newPost) => {
         const detailPost = [...posts, newPost];
+        console.log(detailPost)
         setPostDetail(detailPost);
     }
 
@@ -34,6 +35,7 @@ const Posts = () => {
             try {
                 const res = await axios.get('https://jsonplaceholder.typicode.com/posts')
                 const data = res.data;
+                console.log(data[0])
                 setPosts(data);
                 setLoading(false);
             } catch (error) {
@@ -62,11 +64,12 @@ const Posts = () => {
 
     return (
      <Card >
-            <Typography className={Style.center} variant='h3' gutterBottom>Welcome to my Blog Page</Typography>
+            <Typography className={Style.center} variant='h3' gutterBottom>Welcome to my Blog Page {posts.length} </Typography>
             <hr className={Style.hr}/>
             <CardContent>
 
             <PostList posts={currentPost} loading={loading} handlePost={handlePost}/>
+            {/* <PostList posts={posts} loading={loading} handlePost={handlePost}/> */}
 
              <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
 

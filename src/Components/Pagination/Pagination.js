@@ -31,7 +31,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
         <>
 
             {pageNumbers.map(pageNumber => (
-                    <Button key={pageNumber} onClick={() => paginate(pageNumber)} >
+                    <Button color='secondary' key={pageNumber} onClick={() => paginate(pageNumber)} >
                         {pageNumber}
                     </Button>
             ))}
