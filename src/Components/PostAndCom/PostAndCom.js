@@ -8,6 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import Avatar from '@material-ui/core/Avatar';
+import CardMedia from '@material-ui/core/CardMedia';
 
 
 
@@ -32,8 +34,9 @@ const PostAndCom = () => {
             try {
                 const photoRes = await axios.get(`https://jsonplaceholder.typicode.com/albums/${id}/photos`);
                 const photoData = photoRes.data;
+                console.log(photoData)
                 setPhotos(photoData);
-                setLoading(false)
+                // setLoading(false)
 
             } catch (error) {
                 console.log(error)
@@ -85,11 +88,15 @@ const PostAndCom = () => {
     const useStyles = makeStyles((theme) => ({
         root: {
             flexGrow: 1,
+            overflow: 'hidden',
+            padding: theme.spacing(0, 3),
         },
         paper: {
             padding: theme.spacing(2),
             margin: 'auto',
             maxWidth: 800,
+            margin: `${theme.spacing(1)}px auto`,
+
         },
         image: {
             width: 128,
@@ -107,9 +114,10 @@ const PostAndCom = () => {
 
     const classes = useStyles();
 
+
     return (
 
-        !loading ? (<Box className={classes.root}>
+        !loading ? (<Box>
             <Typography className={style.center} variant='h4'>  {title} </Typography>
             <Typography className={style.center_body} variant='h5'>  {body} </Typography>
             <hr className={style.hr} />
@@ -117,40 +125,44 @@ const PostAndCom = () => {
 
             {
                 comments.map((comment) => (
-                    <Paper key={comment.id} className={classes.paper}>
-                        <Grid container spacing={2}>
-                            <Grid item>
-                                <ButtonBase className={classes.image}>
-                                    {
-                                        photos.map((photo) => <img key={photo.id} className={classes.img} alt="complex" src={photo.thumbnailUrl} />).slice(0, 1)
-                                    }
-                                </ButtonBase>
-                            </Grid>
-                            <Grid item xs={12} sm container>
-                                <Grid item xs container direction="column" spacing={2}>
-                                    <Grid item xs>
-                                        <Typography gutterBottom variant="subtitle1">
-                                            {comment.title}
-                                        </Typography>
-                                        <Typography gutterBottom variant="subtitle1">
-                                            {comment.email}
-                                        </Typography>
-                                        <Typography variant="body2" color="textSecondary">
-                                            {comment.body}
-                                        </Typography>
-                                    </Grid>
+                    <Box className={classes.root}>
+                        <Paper key={comment.id} className={classes.paper}>
+                            <Grid container spacing={2}>
+                                <Grid item>
+                                    <ButtonBase className={classes.image}>
+                                        {
+                                            photos.map((photo) => <img key={photo.id} className={classes.img} alt={photo.title} src={photo.thumbnailUrl} />).slice(0, 1)
+                                        }
+                                    </ButtonBase>
+                                </Grid>
+                                <Grid item xs={12} sm container>
+                                    <Grid item xs container direction="column" spacing={2}>
+                                        <Grid item xs>
+                                            <Typography gutterBottom variant="subtitle1">
+                                                {comment.title}
+                                            </Typography>
+                                            <Typography gutterBottom variant="subtitle1">
+                                                {comment.email}
+                                            </Typography>
+                                            <Typography variant="body2" color="textSecondary">
+                                                {comment.body}
+                                            </Typography>
+                                        </Grid>
 
+                                    </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                    </Paper>
-                )).slice(0, 4)
-            }
+                        </Paper>
+                    </Box> 
+            )).slice(0, 4)
+        }
+            
+
             <Box className={style.btn}>
                 <Button color="secondary" onClick={() => handleBack()}>Go Back</Button>
             </Box>
 
-        </Box>) :  <Typography className={style.center} variant='h1'>  Loading..... </Typography>
+        </Box>) : <Typography className={style.center} variant='h1'>  Loading..... </Typography>
 
     );
 }
