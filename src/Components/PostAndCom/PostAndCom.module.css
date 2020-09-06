@@ -17,3 +17,15 @@
 .btn{
     text-align: center;
 }
+
+.box{
+    border : 1px solid red;
+    height: 100px;
+    display: flex;
+}
+
+.grid{
+    border : 2px solid blue;
+    height: 90px;
+    margin: 5px 0px;
+}
