@@ -117,7 +117,7 @@ const PostAndCom = () => {
             <Typography className={style.center} variant='h4'>  {title} </Typography>
             <Typography className={style.center_body} variant='h5'>  {body} </Typography>
             <hr className={style.hr} />
-            <Typography className={style.center_body} variant='h3'>  Comments </Typography>
+            <Typography className={style.center_body} variant='h3' gutterBottom>  Comments </Typography>
 
             <Box className={classes.root}>
                 <Grid container >
