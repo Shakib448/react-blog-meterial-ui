@@ -28,9 +28,20 @@ const PostAndCom = () => {
     useEffect(() => {
         const photoFatchData = async () => {
             try {
+                //Photo Data
                 const photoRes = await axios.get(`https://jsonplaceholder.typicode.com/albums/${id}/photos`);
                 const photoData = photoRes.data;
                 setPhotos(photoData);
+                //Post Data
+                const post = `posts/${id}/`
+                const idRes = await axios.get(`https://jsonplaceholder.typicode.com/${post}`);
+                const idData = idRes.data;
+                setFetchDetail(idData);
+                //Comments Data
+                const comRes = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`); //postId
+                const comData = comRes.data;
+                setComments(comData);
+
                 setLoading(false)
 
             } catch (error) {
@@ -40,44 +51,13 @@ const PostAndCom = () => {
         photoFatchData();
     }, [id])
 
-    // Comments data
-    useEffect(() => {
-        const comFatchData = async () => {
-            try {
-                const comRes = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`); //postId
-                const comData = comRes.data;
-                setComments(comData);
-                setLoading(false)
-
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        comFatchData();
-    }, [id])
-
+    
     const history = useHistory();
 
     const handleBack = () => {
         history.push('/')
     }
 
-    //Post data
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const post = `posts/${id}/`
-                const idRes = await axios.get(`https://jsonplaceholder.typicode.com/${post}`);
-                const idData = idRes.data;
-                setFetchDetail(idData);
-                setLoading(false)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchData();
-
-    }, [id])
 
 
     const useStyles = makeStyles((theme) => ({
