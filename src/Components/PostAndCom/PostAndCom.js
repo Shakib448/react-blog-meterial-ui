@@ -17,9 +17,9 @@ const PostAndCom = () => {
 
     const [comments, setComments] = useState([]);
 
-    const [loading, setLoading] = useState(true);
-
     const [photos, setPhotos] = useState([]);
+
+    const [loading, setLoading] = useState(true);
 
     const { title, body } = fetchDetail;
 
@@ -57,8 +57,6 @@ const PostAndCom = () => {
     const handleBack = () => {
         history.push('/')
     }
-
-
 
     const useStyles = makeStyles((theme) => ({
         root: {
