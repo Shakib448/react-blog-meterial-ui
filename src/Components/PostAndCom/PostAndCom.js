@@ -7,7 +7,6 @@ import style from './PostAndCom.module.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import ButtonBase from '@material-ui/core/ButtonBase';
 
 
 const PostAndCom = () => {
@@ -39,7 +38,7 @@ const PostAndCom = () => {
             }
         }
         photoFatchData();
-    }, [])
+    }, [id])
 
     // Comments data
     useEffect(() => {
@@ -55,7 +54,7 @@ const PostAndCom = () => {
             }
         }
         comFatchData();
-    }, [])
+    }, [id])
 
     const history = useHistory();
 
@@ -78,7 +77,7 @@ const PostAndCom = () => {
         }
         fetchData();
 
-    }, [])
+    }, [id])
 
 
     const useStyles = makeStyles((theme) => ({
